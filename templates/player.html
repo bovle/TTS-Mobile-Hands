@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+</head>
+
+<body>
+    <div style="margin: -8px; width: {{ 99 * (cards|length) }}vw;">
+        {% for card in cards %}
+
+        <div style="float: left;">
+            <div style="overflow: hidden; height: 80vh; width:95vw; ">
+                <img src="{{ card.url }}"
+                    style="height: {{ 100 * card.num_rows }}%; width: {{ 100 * card.num_cols }}%; margin-top: -{{ 80 * card.row }}vh; margin-left: -{{ 95 * card.col }}vw">
+
+                {% for decal in card.decals %}
+                <img src="{{ decal.url }}"
+                    style="position: absolute; top: {{decal.top}}vh; left: {{decal.left}}vw; width: 9%;" />
+                {% endfor %}
+            </div>
+            <form style="margin:2vw" action="/sendcard/0" method="POST">
+                <input type="text" name="CardID" value="{{ card.CardID }}" style="display:none" />
+                <p style="margin-left: 35%;margin-right: 35%;margin-top: 0;margin-bottom: 0;text-align: center;">
+                    <button type="submit" value="submit">Play card</button></p>
+
+            </form>
+        </div>
+
+
+
+        {% endfor %}
+    </div>
+</body>
+
+</html>
